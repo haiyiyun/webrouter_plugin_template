@@ -27,14 +27,16 @@ func init() {
 	webrouter_plugin_templateDB.M().InitCollection(schema.Collection1)
 	webrouter_plugin_templateService := service.NewService(&webrouter_plugin_templateConf, webrouter_plugin_templateCache, webrouter_plugin_templateDB)
 
-	//Init Begin
-	webrouter_plugin_templateServiceService1Service := webrouter_plugin_templateServiceService1.NewService(webrouter_plugin_templateService)
-	//Init End
+	if webrouter_plugin_templateConf.WebRouter {
+		//Init Begin
+		webrouter_plugin_templateServiceService1Service := webrouter_plugin_templateServiceService1.NewService(webrouter_plugin_templateService)
+		//Init End
 
-	//Go Begin
-	//Go End
+		//Go Begin
+		//Go End
 
-	//Register Begin
-	webrouter.Register("/", webrouter_plugin_templateServiceService1Service)
-	//Register End
+		//Register Begin
+		webrouter.Register(webrouter_plugin_templateConf.WebRouterRootPath+"", webrouter_plugin_templateServiceService1Service)
+		//Register End
+	}
 }
