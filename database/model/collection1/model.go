@@ -1,8 +1,8 @@
 package collection1
 
 import (
-	"webrouter_plugin_template/database"
-	"webrouter_plugin_template/database/schema"
+	"github.com/haiyiyun/webrouter_plugin_template/database"
+	"github.com/haiyiyun/webrouter_plugin_template/database/schema"
 
 	"github.com/haiyiyun/mongodb"
 )

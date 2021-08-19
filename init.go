@@ -4,9 +4,9 @@ import (
 	"context"
 	"flag"
 
-	"webrouter_plugin_template/database/schema"
-	"webrouter_plugin_template/service"
-	plugin_nameServiceService1 "webrouter_plugin_template/service/service1"
+	"github.com/haiyiyun/webrouter_plugin_template/database/schema"
+	"github.com/haiyiyun/webrouter_plugin_template/service"
+	plugin_nameServiceService1 "github.com/haiyiyun/webrouter_plugin_template/service/service1"
 
 	"github.com/haiyiyun/cache"
 	"github.com/haiyiyun/config"

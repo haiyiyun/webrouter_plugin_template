@@ -1,4 +1,4 @@
-module webrouter_plugin_template
+module github.com/haiyiyun/webrouter_plugin_template
 
 go 1.16
 

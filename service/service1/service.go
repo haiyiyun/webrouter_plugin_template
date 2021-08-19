@@ -1,7 +1,7 @@
 package service1
 
 import (
-	"webrouter_plugin_template/service"
+	"github.com/haiyiyun/webrouter_plugin_template/service"
 )
 
 type Service struct {
