@@ -6,7 +6,7 @@ import (
 
 	"github.com/haiyiyun/webrouter_plugin_template/database/schema"
 	"github.com/haiyiyun/webrouter_plugin_template/service"
-	plugin_nameServiceService1 "github.com/haiyiyun/webrouter_plugin_template/service/service1"
+	webrouter_plugin_templateServiceService1 "github.com/haiyiyun/webrouter_plugin_template/service/service1"
 
 	"github.com/haiyiyun/cache"
 	"github.com/haiyiyun/config"
@@ -16,25 +16,25 @@ import (
 )
 
 func init() {
-	plugin_nameConfFile := flag.String("config.plugin_name", "../config/plugins/plugin_name/plugin_name.conf", "plugin_name config file")
-	var plugin_nameConf service.Config
-	config.Files(*plugin_nameConfFile).Load(&plugin_nameConf)
+	webrouter_plugin_templateConfFile := flag.String("config.webrouter_plugin_template", "../config/plugins/webrouter_plugin_template/webrouter_plugin_template.conf", "webrouter_plugin_template config file")
+	var webrouter_plugin_templateConf service.Config
+	config.Files(*webrouter_plugin_templateConfFile).Load(&webrouter_plugin_templateConf)
 
-	plugin_nameCache := cache.New(plugin_nameConf.CacheDefaultExpiration.Duration, plugin_nameConf.CacheCleanupInterval.Duration)
-	plugin_nameDB := mongodb.NewMongoPool("", plugin_nameConf.MongoDatabaseName, 100, options.Client().ApplyURI(plugin_nameConf.MongoDNS))
-	webrouter.SetCloser(func() { plugin_nameDB.Disconnect(context.TODO()) })
+	webrouter_plugin_templateCache := cache.New(webrouter_plugin_templateConf.CacheDefaultExpiration.Duration, webrouter_plugin_templateConf.CacheCleanupInterval.Duration)
+	webrouter_plugin_templateDB := mongodb.NewMongoPool("", webrouter_plugin_templateConf.MongoDatabaseName, 100, options.Client().ApplyURI(webrouter_plugin_templateConf.MongoDNS))
+	webrouter.SetCloser(func() { webrouter_plugin_templateDB.Disconnect(context.TODO()) })
 
-	plugin_nameDB.M().InitCollection(schema.Collection1)
-	plugin_nameService := service.NewService(&plugin_nameConf, plugin_nameCache, plugin_nameDB)
+	webrouter_plugin_templateDB.M().InitCollection(schema.Collection1)
+	webrouter_plugin_templateService := service.NewService(&webrouter_plugin_templateConf, webrouter_plugin_templateCache, webrouter_plugin_templateDB)
 
 	//Init Begin
-	plugin_nameServiceService1Service := plugin_nameServiceService1.NewService(plugin_nameService)
+	webrouter_plugin_templateServiceService1Service := webrouter_plugin_templateServiceService1.NewService(webrouter_plugin_templateService)
 	//Init End
 
 	//Go Begin
 	//Go End
 
 	//Register Begin
-	webrouter.Register("/", plugin_nameServiceService1Service)
+	webrouter.Register("/", webrouter_plugin_templateServiceService1Service)
 	//Register End
 }
