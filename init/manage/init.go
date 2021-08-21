@@ -17,7 +17,7 @@ import (
 )
 
 func init() {
-	baseConfFile := flag.String("config.plugins.webrouter_plugin_template.base", "../config/plugins/webrouter_plugin_template/base.conf", "base config file")
+	baseConfFile := flag.String("config.plugins.webrouter_plugin_template.manage.base", "../config/plugins/webrouter_plugin_template/base.conf", "base config file")
 	var baseConf base.Config
 	config.Files(*baseConfFile).Load(&baseConf)
 
