@@ -5,6 +5,7 @@ import (
 	"flag"
 
 	"github.com/haiyiyun/webrouter_plugin_template/database/schema"
+	"github.com/haiyiyun/webrouter_plugin_template/service/base"
 	"github.com/haiyiyun/webrouter_plugin_template/service/manage"
 	manageService1 "github.com/haiyiyun/webrouter_plugin_template/service/manage/service1"
 
@@ -16,18 +17,26 @@ import (
 )
 
 func init() {
+	baseConfFile := flag.String("config.plugins.webrouter_plugin_template.base", "../config/plugins/webrouter_plugin_template/base.conf", "base config file")
+	var baseConf base.Config
+	config.Files(*baseConfFile).Load(&baseConf)
+
+	baseCache := cache.New(baseConf.CacheDefaultExpiration.Duration, baseConf.CacheCleanupInterval.Duration)
+	baseDB := mongodb.NewMongoPool("", baseConf.MongoDatabaseName, 100, options.Client().ApplyURI(baseConf.MongoDNS))
+	webrouter.SetCloser(func() { baseDB.Disconnect(context.TODO()) })
+
+	baseDB.M().InitCollection(schema.Collection1)
+
+	baseService := base.NewService(&baseConf, baseCache, baseDB)
+
 	manageConfFile := flag.String("config.webrouter_plugin_template.manage", "../config/plugins/webrouter_plugin_template/manage.conf", "manage config file")
 	var manageConf manage.Config
 	config.Files(*manageConfFile).Load(&manageConf)
 
-	manageCache := cache.New(manageConf.CacheDefaultExpiration.Duration, manageConf.CacheCleanupInterval.Duration)
-	manageDB := mongodb.NewMongoPool("", manageConf.MongoDatabaseName, 100, options.Client().ApplyURI(manageConf.MongoDNS))
-	webrouter.SetCloser(func() { manageDB.Disconnect(context.TODO()) })
-
-	manageDB.M().InitCollection(schema.Collection1)
-	manageService := manage.NewService(&manageConf, manageCache, manageDB)
-
 	if manageConf.WebRouter {
+		manageConf.Config = baseConf
+		manageService := manage.NewService(&manageConf, baseService)
+
 		//Init Begin
 		manageeService1Service := manageService1.NewService(manageService)
 		//Init End

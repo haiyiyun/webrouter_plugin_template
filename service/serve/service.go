@@ -1,20 +1,15 @@
 package serve
 
-import (
-	"github.com/haiyiyun/cache"
-	"github.com/haiyiyun/mongodb"
-)
+import "github.com/haiyiyun/webrouter_plugin_template/service/base"
 
 type Service struct {
 	*Config
-	*cache.Cache
-	M mongodb.Mongoer
+	*base.Service
 }
 
-func NewService(c *Config, cc *cache.Cache, m mongodb.Mongoer) *Service {
+func NewService(c *Config, s *base.Service) *Service {
 	return &Service{
-		Config: c,
-		Cache:  cc,
-		M:      m,
+		Config:  c,
+		Service: s,
 	}
 }
