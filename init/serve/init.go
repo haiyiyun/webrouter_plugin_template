@@ -38,14 +38,14 @@ func init() {
 		serveService := serve.NewService(&serveConf, baseService)
 
 		//Init Begin
-		serveeService1Service := serveService1.NewService(serveService)
+		serveService1Service := serveService1.NewService(serveService)
 		//Init End
 
 		//Go Begin
 		//Go End
 
 		//Register Begin
-		webrouter.Register(serveConf.WebRouterRootPath+"", serveeService1Service)
+		webrouter.Register(serveConf.WebRouterRootPath+"", serveService1Service)
 		//Register End
 	}
 }

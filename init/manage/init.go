@@ -38,14 +38,14 @@ func init() {
 		manageService := manage.NewService(&manageConf, baseService)
 
 		//Init Begin
-		manageeService1Service := manageService1.NewService(manageService)
+		manageService1Service := manageService1.NewService(manageService)
 		//Init End
 
 		//Go Begin
 		//Go End
 
 		//Register Begin
-		webrouter.Register(manageConf.WebRouterRootPath+"", manageeService1Service)
+		webrouter.Register(manageConf.WebRouterRootPath+"", manageService1Service)
 		//Register End
 	}
 }
