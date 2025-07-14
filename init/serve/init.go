@@ -18,7 +18,7 @@ import (
 )
 
 func init() {
-	serveConfFile := flag.String("config.webrouter_plugin_template.serve", "../config/plugins/webrouter_plugin_template/serve.conf", "serve config file")
+	serveConfFile := flag.String("config.plugins.webrouter_plugin_template.serve", "../config/plugins/webrouter_plugin_template/serve.conf", "serve config file")
 	var serveConf serve.Config
 	config.Files(*serveConfFile).Load(&serveConf)
 
