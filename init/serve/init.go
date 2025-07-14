@@ -3,6 +3,7 @@ package serve
 import (
 	"context"
 	"flag"
+	"os"
 
 	"github.com/haiyiyun/webrouter_plugin_template/database/schema"
 	"github.com/haiyiyun/webrouter_plugin_template/service/base"
@@ -25,6 +26,9 @@ func init() {
 		baseConfFile := flag.String("config.plugins.webrouter_plugin_template.serve.base", "../config/plugins/webrouter_plugin_template/base.conf", "base config file")
 		var baseConf base.Config
 		config.Files(*baseConfFile).Load(&baseConf)
+
+		os.Setenv("HYY_CACHE_TYPE", baseConf.CacheType)
+		os.Setenv("HYY_CACHE_URL", baseConf.CacheUrl)
 
 		baseCache := cache.New(baseConf.CacheDefaultExpiration.Duration, baseConf.CacheCleanupInterval.Duration)
 		baseDB := mongodb.NewMongoPool("", baseConf.MongoDatabaseName, 100, options.Client().ApplyURI(baseConf.MongoDNS))
