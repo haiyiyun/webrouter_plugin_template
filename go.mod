@@ -3,7 +3,7 @@ module github.com/haiyiyun/webrouter_plugin_template
 go 1.24.5
 
 require (
-	github.com/haiyiyun/cache v0.0.0-20250715143508-d58c9c88b239
+	github.com/haiyiyun/cache v0.0.0-20250717045307-c3e81b519685
 	github.com/haiyiyun/config v0.0.0-20250714023604-d016627953cf
 	github.com/haiyiyun/mongodb v0.0.0-20250715190144-2fc9debd582d
 	github.com/haiyiyun/webrouter v0.0.0-20250714030435-4a329d81f352
@@ -14,6 +14,7 @@ require (
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/golang/snappy v0.0.4 // indirect
+	github.com/google/uuid v1.6.0 // indirect
 	github.com/haiyiyun/log v0.0.0-20250714021242-243291bf2f88 // indirect
 	github.com/haiyiyun/utils v0.0.0-20250715175739-00233869a314 // indirect
 	github.com/haiyiyun/uuid v0.0.0-20250714025316-0cd7ec9ae801 // indirect
